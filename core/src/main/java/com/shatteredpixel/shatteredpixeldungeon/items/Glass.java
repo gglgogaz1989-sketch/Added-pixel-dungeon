@@ -6,7 +6,8 @@ public class Glass extends Item {
     { image = 254; stackable = true; }
     @Override public String name() { return "стекло"; }
 
-    public static class Recipe extends Recipe.SimpleRecipe {
+    // Переименовали в GlassRecipe и указали полный путь к родителю
+    public static class GlassRecipe extends com.shatteredpixel.shatteredpixeldungeon.items.Recipe.SimpleRecipe {
         {
             inputs = new Class[]{PotionOfLiquidFlame.class, Bottle.class};
             inQuantity = new int[]{1, 1};
