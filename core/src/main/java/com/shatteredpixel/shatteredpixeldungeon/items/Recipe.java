@@ -198,7 +198,7 @@ public abstract class Recipe {
 	};
 	
 		private static Recipe[] twoIngredientRecipes = new Recipe[]{
-		new Glass.Recipe(), 
+		new Glass.GlassRecipe(),
 		new Blandfruit.CookFruit(),
 		new Bomb.EnhanceBomb(),
 		new UnstableBrew.Recipe(),
@@ -216,6 +216,7 @@ public abstract class Recipe {
 	
 	
 	private static Recipe[] threeIngredientRecipes = new Recipe[]{
+		new Diamond.DiamondRecipe(),
 		new Potion.SeedToPotion(),
 		new StewedMeat.threeMeat(),
 		new MeatPie.Recipe()
