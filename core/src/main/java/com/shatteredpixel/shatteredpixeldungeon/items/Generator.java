@@ -210,6 +210,11 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
+import com.shatteredpixel.shatteredpixeldungeon.items.HardIron;
+import com.shatteredpixel.shatteredpixeldungeon.items.Glass;
+import com.shatteredpixel.shatteredpixeldungeon.items.Bottle;
+import com.shatteredpixel.shatteredpixeldungeon.items.Diamond;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
