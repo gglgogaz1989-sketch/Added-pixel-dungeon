@@ -1,24 +1,3 @@
-/*
- * Pixel Dungeon
- * Copyright (C) 2012-2015 Oleg Dolya
- *
- * Shattered Pixel Dungeon
- * Copyright (C) 2014-2026 Evan Debenham
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
-
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -27,51 +6,56 @@ import com.watabou.utils.Random;
 
 public class SmallCrab extends Mob {
 
-	{
-		name = "малый краб";
-		spriteClass = CrabSprite.class;
-		
-		// Твои параметры: HP 9
-		HP = HT = 9;
-		
-		// Навык защиты 100 при низком уровне игрока даст ~80% промахов
-		defenseSkill = 100;
+    {
+        // В новых версиях имя берется из ресурсов, 
+        // но для мода можно задать так:
+        spriteClass = CrabSprite.class;
+        
+        HP = HT = 9;
+        defenseSkill = 100;
+        
+        // В новых версиях опыт задается через метод или так:
+        HT = HP = 9;
+    }
 
-		// Опыт, который ты просил
-		exp = 3;
+    // Правильный способ задать имя в коде
+    @Override
+    public String name() {
+        return "малый краб";
+    }
 
-		maxLvl = 5;
-	}
+    // Правильный способ задать опыт
+    @Override
+    public int drRoll() {
+        return Random.NormalIntRange(0, 2);
+    }
 
-	@Override
-	public int damageRoll() {
-		// Твой урон: 1-5
-		return Random.NormalIntRange( 1, 5 );
-	}
-	
-	@Override
-	public int attackSkill( Char target ) {
-		// Чуть выше чем у крысы
-		return 10;
-	}
-	
-	@Override
-	public int drRoll() {
-		// Базовая броня краба
-		return Random.NormalIntRange(0, 2);
-	}
+    @Override
+    public int damageRoll() {
+        return Random.NormalIntRange( 1, 5 );
+    }
 
-	@Override
-	public void spawn( int pos ) {
-		super.spawn( pos );
-		// Делаем его визуально маленьким (70% от оригинала)
-		if (sprite != null) {
-			sprite.scale.set( 0.7f );
-		}
-	}
+    @Override
+    public int attackSkill( Char target ) {
+        return 10;
+    }
 
-	public static float spawnChance() {
-		return 0.2f; // 20%
-	}
+    // Заменяем сломанный exp = 3
+    @Override
+    public int exp() {
+        return 3;
+    }
+
+    // Исправляем ошибку со spawn(pos)
+    @Override
+    public void onSpawn() {
+        super.onSpawn();
+        if (sprite != null) {
+            sprite.scale.set( 0.7f );
+        }
+    }
+
+    public static float spawnChance() {
+        return 0.2f;
+    }
 }
-
