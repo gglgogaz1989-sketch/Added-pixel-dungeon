@@ -7,24 +7,21 @@ import com.watabou.utils.Random;
 public class SmallCrab extends Mob {
 
     {
-        // В новых версиях имя берется из ресурсов, 
-        // но для мода можно задать так:
         spriteClass = CrabSprite.class;
         
         HP = HT = 9;
         defenseSkill = 100;
         
-        // В новых версиях опыт задается через метод или так:
-        HT = HP = 9;
+        // Попробуем прописать опыт напрямую в переменную, 
+        // так как метод exp() у тебя не переопределяется
+        exp = 3;
     }
 
-    // Правильный способ задать имя в коде
     @Override
     public String name() {
         return "малый краб";
     }
 
-    // Правильный способ задать опыт
     @Override
     public int drRoll() {
         return Random.NormalIntRange(0, 2);
@@ -40,16 +37,14 @@ public class SmallCrab extends Mob {
         return 10;
     }
 
-    // Заменяем сломанный exp = 3
-    @Override
-    public int exp() {
-        return 3;
-    }
+    // Если переменная exp выше выдаст ошибку, используй этот способ без @Override
+    // Но пока оставляем как переменную.
 
-    // Исправляем ошибку со spawn(pos)
     @Override
-    public void onSpawn() {
-        super.onSpawn();
+    public void spawn( int pos ) {
+        super.spawn( pos );
+        // Если scale не сработает, краб просто будет обычного размера, 
+        // но игра НЕ вылетит
         if (sprite != null) {
             sprite.scale.set( 0.7f );
         }
