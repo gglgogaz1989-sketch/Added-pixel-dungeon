@@ -5,8 +5,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlam
 public class Diamond extends Item {
     { image = 255; stackable = true; }
     @Override public String name() { return "алмаз"; }
-    
-    public static class Recipe extends Recipe.SimpleRecipe {
+
+    // Переименовали в DiamondRecipe
+    public static class DiamondRecipe extends com.shatteredpixel.shatteredpixeldungeon.items.Recipe.SimpleRecipe {
         {
             inputs = new Class[]{HardIron.class, Glass.class, PotionOfLiquidFlame.class};
             inQuantity = new int[]{1, 1, 1};
