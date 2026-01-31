@@ -61,7 +61,7 @@ public class PotionOfHealing extends Potion {
 		} else {
 			//starts out healing 30 hp, equalizes with hero health total at level 11
 			Healing healing = Buff.affect(ch, Healing.class);
-			healing.setHeal((int) (0.8f * ch.HT + 14), 0.25f, 0);
+			healing.setHeal((int) (0.8f * ch.HT + 19), 0.25f, 0);
 			healing.applyVialEffect();
 			if (ch == Dungeon.hero){
 				GLog.p( Messages.get(PotionOfHealing.class, "heal") );
@@ -71,7 +71,7 @@ public class PotionOfHealing extends Potion {
 
 	public static void pharmacophobiaProc( Hero hero ){
 		// harms the hero for ~40% of their max HP in poison
-		Buff.affect( hero, Poison.class).set(4 + hero.lvl/2);
+		Buff.affect( hero, Poison.class).set(9 + hero.lvl/2);
 	}
 	
 	public static void cure( Char ch ) {
@@ -88,6 +88,6 @@ public class PotionOfHealing extends Potion {
 
 	@Override
 	public int value() {
-		return isKnown() ? 30 * quantity : super.value();
+		return isKnown() ? 90 * quantity : super.value();
 	}
 }
