@@ -12,10 +12,10 @@ public class SmallCrab extends Mob {
 		// Твои параметры: HP 9
 		HP = HT = 9;
 		
-		// 80% уклонения за счет огромного навыка защиты
+		// Огромная защита для промахов
 		defenseSkill = 100;
 		
-		// В твоей версии опыт пишется большими буквами:
+		// Опыт как в твоем примере
 		EXP = 3;
 		maxLvl = 5;
 	}
@@ -38,16 +38,7 @@ public class SmallCrab extends Mob {
 	
 	@Override
 	public int drRoll() {
-		// Базовая броня
+		// Базовая броня (Damage Reduction)
 		return Random.NormalIntRange(0, 2);
-	}
-
-	@Override
-	public void spawn( int pos ) {
-		super.spawn( pos );
-		// Уменьшаем размер до 70%
-		if (sprite != null) {
-			sprite.scale.set( 0.7f );
-		}
 	}
 }
