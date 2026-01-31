@@ -1,25 +1,21 @@
 package com.shatteredpixel.shatteredpixeldungeon.items;
 
+import com.shatteredpixel.shatteredpixeldungeon.items.alchemy.AlchemicalRecipe;
+import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame;
+
 public class Diamond extends Item {
     {
-        // Тот самый голубой кристалл, который ты нарисовал последним
-        image = 255; 
+        image = 255;
         stackable = true;
     }
 
     @Override
-    public String name() {
-        return "алмаз";
+    public String name() { return "алмаз"; }
+
+    // Пробуем прописать рецепт прямо тут (для версии 3.0+)
+    public AlchemicalRecipe recipe() {
+        return new AlchemicalRecipe(this, 10, HardIron.class, Glass.class, PotionOfLiquidFlame.class);
     }
 
-    @Override
-    public String info() {
-        return "Невероятно твердый и чистый драгоценный камень. " +
-               "Его грани светятся внутренним светом, способным указать путь.";
-    }
-
-    @Override
-    public int price() {
-        return 300; // Твоя цена в магазине
-    }
+    public int price() { return 300; }
 }
