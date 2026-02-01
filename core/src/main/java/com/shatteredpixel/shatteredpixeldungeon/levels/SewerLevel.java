@@ -106,6 +106,21 @@ public class SewerLevel extends RegularLevel {
 				.setGrass(feeling == Feeling.GRASS ? 0.80f : 0.20f, 4)
 				.setTraps(nTraps(), trapClasses(), trapChances());
 	}
+		@Override
+	protected int specialRooms(boolean forceMax) {
+		int n = super.specialRooms(forceMax);
+		if (Dungeon.depth == 1) n++; 
+		return n;
+	}
+
+	@Override
+	public void addSpecialRooms(java.util.ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms) {
+		// Мы не вызываем super, если его нет в родителе
+		if (Dungeon.depth == 1) {
+			rooms.add(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ObsidianRoom());
+		}
+	}
+	
 	
 	@Override
 	public String tilesTex() {
@@ -308,15 +323,5 @@ public class SewerLevel extends RegularLevel {
 			
 			left = lifespan = 0.4f;
 		}
-@Override
-public void create() {
-    super.create();
-    if (Dungeon.depth == 1) {
-        // Добавляем комнату в список спец. комнат уровня
-        specialRooms.add( new ObsidianRoom() );
-    }
-}
-		
-		
 	}
 }
