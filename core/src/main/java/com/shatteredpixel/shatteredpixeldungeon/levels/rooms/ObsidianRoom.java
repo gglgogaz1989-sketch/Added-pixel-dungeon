@@ -4,6 +4,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.keys.ObsidianKey;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
+// ВОТ ЭТИХ ИМПОРТОВ НЕ ХВАТАЛО:
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.StandardRoom;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.Door;
 
 public class ObsidianRoom extends StandardRoom {
 
@@ -18,24 +21,22 @@ public class ObsidianRoom extends StandardRoom {
 
     @Override
     public void paint(Level level) {
-        // 1. Заполняем комнату стенами по периметру и полом внутри
+        // Рисуем стены и пол
         Painter.fill(level, this, Terrain.WALL, Terrain.EMPTY_SP);
 
-        // 2. Ставим сундук ровно по центру
+        // Ставим сундук
         int center = level.pointToCell(center());
         level.set(center, Terrain.OBSIDIAN_CHEST);
 
-        // 3. Ищем случайное место для ключа, чтобы он не упал ВНУТРЬ сундука
+        // Бросаем ключ
         int keyPos;
         do {
-            // random() - встроенный метод комнаты, берет случайную точку внутри неё
             keyPos = level.pointToCell(random());
-        } while (keyPos == center); // Если случайно попали в центр (сундук) — ищем снова
+        } while (keyPos == center);
 
-        // 4. Бросаем ключ
         level.drop(new ObsidianKey(), keyPos).sprite.drop();
 
-        // 5. Запираем все двери
+        // Запираем двери
         for (Door door : connected.values()) {
             door.set(Door.Type.LOCKED);
         }
