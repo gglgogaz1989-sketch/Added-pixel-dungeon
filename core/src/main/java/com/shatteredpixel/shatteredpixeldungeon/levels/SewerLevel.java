@@ -309,12 +309,13 @@ public class SewerLevel extends RegularLevel {
 			left = lifespan = 0.4f;
 		}
 @Override
-protected void addSpecialRooms(java.util.ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms) {
-    super.addSpecialRooms(rooms);
+public void decorate() {
+    super.decorate();
     if (Dungeon.depth == 1) {
-        // Принудительно добавляем обсидиановую комнату в список генерации
-        rooms.add(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ObsidianRoom());
+        // Теперь, благодаря импорту выше, можно писать просто ObsidianRoom
+        rooms.add(new ObsidianRoom());
     }
 }
+		
 	}
 }
