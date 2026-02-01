@@ -115,6 +115,10 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.TippedDart;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.watabou.utils.Bundle;
+import com.shatteredpixel.shatteredpixeldungeon.items.Diamond;
+import com.shatteredpixel.shatteredpixeldungeon.items.Glass;
+import com.shatteredpixel.shatteredpixeldungeon.items.HardIron;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -258,7 +262,7 @@ public enum Catalog {
 				CorpseDust.class, Embers.class, CeremonialCandle.class, DarkGold.class, DwarfToken.class,
 				GooBlob.class, TengusMask.class, MetalShard.class, KingsCrown.class,
 				LiquidMetal.class, ArcaneResin.class,
-				SealShard.class, BrokenStaff.class, CloakScrap.class, BowFragment.class, BrokenHilt.class, TornPage.class);
+				SealShard.class, BrokenStaff.class, CloakScrap.class, BowFragment.class, BrokenHilt.class, TornPage.class, Diamond.class, HardIron.class, Glass.class);
 
 	}
 
