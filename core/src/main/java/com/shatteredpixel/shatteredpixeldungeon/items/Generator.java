@@ -323,48 +323,39 @@ public class Generator {
 			if (catResult != -1) return catResult*100 + subResult;
 
 			//items without a category-defined order are sorted based on the spritesheet
-			return Short.MAX_VALUE+item.image();
-		}
+    // Строка 326 (метод order еще открыт)
+    return Short.MAX_VALUE+item.image();
+    } // Скобка 1: Закрывает метод order
 
-		static {
-	static {
-        // ... тут заканчивается метод order ...
-        if (catResult != -1) return catResult*100 + subResult;
+} // Скобка 2: Закрывает enum Category
 
-        return Short.MAX_VALUE+item.image();
-    } // ЭТА СКОБКА ЗАКРЫВАЕТ МЕТОД ORDER
-
-} // ЭТА СКОБКА ЗАКРЫВАЕТ ENUM CATEGORY (Её отсутствие ломает всё!)
-
-            static { // ОСТАВЬ ТОЛЬКО ОДИН РАЗ
-            FOOD.classes = new Class<?>[]{
-            Food.class, Pasty.class, MysteryMeat.class,
-            HardIron.class, Glass.class, Bottle.class, Diamond.class 
-        };
-            FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
- 
-            GOLD.classes = new Class<?>[]{
-                   Gold.class };
-        GOLD.probs = new float[]{ 1 };
-        // ТУТ НЕ ДОЛЖНО БЫТЬ ОТКРЫВАЮЩЕЙ СКОБКИ {
-	GOLD.probs = new float[]{ 1 };
-			
+static { // Начало блока настроек (строка 340 на фото)
+    FOOD.classes = new Class<?>[]{
+        Food.class, Pasty.class, MysteryMeat.class,
+        HardIron.class, Glass.class, Bottle.class, Diamond.class 
+    };
+	
+	
+    FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
     
-    // ... дальше идут POTION и остальные ...
-				 
-					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
-					PotionOfHealing.class,
-					PotionOfMindVision.class,
-					PotionOfFrost.class,
-					PotionOfLiquidFlame.class,
-					PotionOfToxicGas.class,
-					PotionOfHaste.class,
-					PotionOfInvisibility.class,
-					PotionOfLevitation.class,
-					PotionOfParalyticGas.class,
-                    PotionOfPurity.class,
-                    PotionOfExperience.class
-          }; // Вот эта скобка ДОЛЖНА закрывать массив POTION.classes
+    GOLD.classes = new Class<?>[]{
+        Gold.class };
+    GOLD.probs = new float[]{ 1 };
+	
+		POTION.classes = new Class<?>[]{
+				PotionOfStrength.class,
+				PotionOfHealing.class,
+				PotionOfMindVision.class,
+				PotionOfFrost.class,
+				PotionOfLiquidFlame.class,
+				PotionOfToxicGas.class,
+				PotionOfHaste.class,
+				PotionOfInvisibility.class,
+				PotionOfLevitation.class,
+				PotionOfParalyticGas.class,
+				PotionOfPurity.class,
+				PotionOfExperience.class,
+		}
 
     POTION.defaultProbs  = new float[]{ 0, 3, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1 };
     // Дальше код пойдёт нормально
