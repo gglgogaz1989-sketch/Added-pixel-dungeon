@@ -301,33 +301,13 @@ public class Generator {
 			int catResult = -1, subResult = 0;
 			for (int i=0; i < values().length; i++) {
 				ArrayList<Class> subOrdering = subOrderings.get(values()[i].superClass);
-				if (subOrdering != null){
-					for (int j=0; j < subOrdering.size(); j++){
-						if (subOrdering.get(j).isInstance(item)){
-							catResult = i;
-							subResult = j;
-						}
-					}
-				} else {
-					if (values()[i].superClass.isInstance(item)) {
-						catResult = i;
-						subResult = 0;
-					}
-				}
-			}
-			if (catResult != -1) return catResult*100 + subResult;
-
-			//items without a category-defined order are sorted based on the spritesheet
-			return Short.MAX_VALUE+item.image();
-		}
-
-		static {
+				static {
 			GOLD.classes = new Class<?>[]{
 					Gold.class };
 			GOLD.probs = new float[]{ 1 };
 			
 			POTION.classes = new Class<?>[]{
-					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
+					PotionOfStrength.class,
 					PotionOfHealing.class,
 					PotionOfMindVision.class,
 					PotionOfFrost.class,
@@ -340,11 +320,11 @@ public class Generator {
 					PotionOfPurity.class,
 					PotionOfExperience.class};
 			POTION.defaultProbs  = new float[]{ 0, 3, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1 };
-			POTION.defaultProbs2 = new float[]{ 0, 3, 2, 2, 1, 2, 1, 1, 1,
+			POTION.defaultProbs2 = new float[]{ 0, 3, 2, 2, 1, 2, 1, 1, 1, 1, 1, 0 };
 			POTION.probs = POTION.defaultProbs.clone();
 			
 			SEED.classes = new Class<?>[]{
-					Rotberry.Seed.class, //quest item
+					Rotberry.Seed.class,
 					Sungrass.Seed.class,
 					Fadeleaf.Seed.class,
 					Icecap.Seed.class,
@@ -360,7 +340,7 @@ public class Generator {
 			SEED.probs = SEED.defaultProbs.clone();
 			
 			SCROLL.classes = new Class<?>[]{
-					ScrollOfUpgrade.class, //3 drop every chapter, see Dungeon.souNeeded()
+					ScrollOfUpgrade.class,
 					ScrollOfIdentify.class,
 					ScrollOfRemoveCurse.class,
 					ScrollOfMirrorImage.class,
@@ -378,8 +358,8 @@ public class Generator {
 			SCROLL.probs = SCROLL.defaultProbs.clone();
 			
 			STONE.classes = new Class<?>[]{
-					StoneOfEnchantment.class,   //1 is guaranteed to drop on floors 6-19
-					StoneOfIntuition.class,     //1 additional stone is also dropped on floors 1-3
+					StoneOfEnchantment.class,
+					StoneOfIntuition.class,
 					StoneOfDetectMagic.class,
 					StoneOfFlock.class,
 					StoneOfShock.class,
@@ -389,7 +369,7 @@ public class Generator {
 					StoneOfAggression.class,
 					StoneOfBlast.class,
 					StoneOfFear.class,
-					StoneOfAugmentation.class  //1 is sold in each shop
+					StoneOfAugmentation.class
 			};
 			STONE.defaultProbs = new float[]{ 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0 };
 			STONE.probs = STONE.defaultProbs.clone();
@@ -411,7 +391,6 @@ public class Generator {
 			WAND.defaultProbs = new float[]{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
 			WAND.probs = WAND.defaultProbs.clone();
 			
-			//see generator.randomWeapon
 			WEAPON.classes = new Class<?>[]{};
 			WEAPON.probs = new float[]{};
 			
@@ -457,8 +436,7 @@ public class Generator {
 					AssassinsBlade.class,
 					Crossbow.class,
 					Katana.class
-				
-		};
+			};
 			WEP_T4.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 };
 			WEP_T4.probs = WEP_T4.defaultProbs.clone();
 			
@@ -474,128 +452,79 @@ public class Generator {
 			WEP_T5.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 };
 			WEP_T5.probs = WEP_T5.defaultProbs.clone();
 			
-			//see Generator.randomArmor
 			ARMOR.classes = new Class<?>[]{
-					ClothArmor.class,
-					LeatherArmor.class,
-					MailArmor.class,
-					ScaleArmor.class,
-					PlateArmor.class,
-					WarriorArmor.class,
-					MageArmor.class,
-					RogueArmor.class,
-					HuntressArmor.class,
-					DuelistArmor.class,
-					ClericArmor.class
+					ClothArmor.class, LeatherArmor.class, MailArmor.class,
+					ScaleArmor.class, PlateArmor.class, WarriorArmor.class,
+					MageArmor.class, RogueArmor.class, HuntressArmor.class,
+					DuelistArmor.class, ClericArmor.class
 			};
 			ARMOR.probs = new float[]{ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 };
 			
-			//see Generator.randomMissile
 			MISSILE.classes = new Class<?>[]{};
 			MISSILE.probs = new float[]{};
 			
 			MIS_T1.classes = new Class<?>[]{
-					ThrowingStone.class,
-					ThrowingKnife.class,
-					ThrowingSpike.class,
-					Dart.class
+					ThrowingStone.class, ThrowingKnife.class,
+					ThrowingSpike.class, Dart.class
 			};
 			MIS_T1.defaultProbs = new float[]{ 3, 3, 3, 0 };
 			MIS_T1.probs = MIS_T1.defaultProbs.clone();
 			
 			MIS_T2.classes = new Class<?>[]{
-					FishingSpear.class,
-					ThrowingClub.class,
-					Shuriken.class
+					FishingSpear.class, ThrowingClub.class, Shuriken.class
 			};
 			MIS_T2.defaultProbs = new float[]{ 3, 3, 3 };
 			MIS_T2.probs = MIS_T2.defaultProbs.clone();
 			
 			MIS_T3.classes = new Class<?>[]{
-					ThrowingSpear.class,
-					Kunai.class,
-					Bolas.class
+					ThrowingSpear.class, Kunai.class, Bolas.class
 			};
 			MIS_T3.defaultProbs = new float[]{ 3, 3, 3 };
 			MIS_T3.probs = MIS_T3.defaultProbs.clone();
 			
 			MIS_T4.classes = new Class<?>[]{
-					Javelin.class,
-					Tomahawk.class,
-					HeavyBoomerang.class
+					Javelin.class, Tomahawk.class, HeavyBoomerang.class
 			};
 			MIS_T4.defaultProbs = new float[]{ 3, 3, 3 };
 			MIS_T4.probs = MIS_T4.defaultProbs.clone();
 			
 			MIS_T5.classes = new Class<?>[]{
-					Trident.class,
-					ThrowingHammer.class,
-					ForceCube.class
+					Trident.class, ThrowingHammer.class, ForceCube.class
 			};
 			MIS_T5.defaultProbs = new float[]{ 3, 3, 3 };
 			MIS_T5.probs = MIS_T5.defaultProbs.clone();
 			
 			FOOD.classes = new Class<?>[]{
-					Food.class,
-					Pasty.class,
-					MysteryMeat.class };
-			FOOD.defaultProbs = new float[]{ 4, 1, 0 };
+					Food.class, Pasty.class, MysteryMeat.class,
+					HardIron.class, Glass.class, Bottle.class, Diamond.class };
+			FOOD.defaultProbs = new float[]{ 4, 1, 0, 0, 0, 0, 0 }; // 0 значит, что в мире не валяются, только в магазине
 			FOOD.probs = FOOD.defaultProbs.clone();
 			
 			RING.classes = new Class<?>[]{
-					RingOfAccuracy.class,
-					RingOfArcana.class,
-					RingOfElements.class,
-					RingOfEnergy.class,
-					RingOfEvasion.class,
-					RingOfForce.class,
-					RingOfFuror.class,
-					RingOfHaste.class,
-					RingOfMight.class,
-					RingOfSharpshooting.class,
-					RingOfTenacity.class,
-					RingOfWealth.class};
+					RingOfAccuracy.class, RingOfArcana.class, RingOfElements.class,
+					RingOfEnergy.class, RingOfEvasion.class, RingOfForce.class,
+					RingOfFuror.class, RingOfHaste.class, RingOfMight.class,
+					RingOfSharpshooting.class, RingOfTenacity.class, RingOfWealth.class};
 			RING.defaultProbs = new float[]{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
 			RING.probs = RING.defaultProbs.clone();
 			
 			ARTIFACT.classes = new Class<?>[]{
-					AlchemistsToolkit.class,
-					ChaliceOfBlood.class,
-					CloakOfShadows.class,
-					DriedRose.class,
-					EtherealChains.class,
-					HolyTome.class,
-					HornOfPlenty.class,
-					MasterThievesArmband.class,
-					SandalsOfNature.class,
-					SkeletonKey.class,
-					TalismanOfForesight.class,
-					TimekeepersHourglass.class,
+					AlchemistsToolkit.class, ChaliceOfBlood.class, CloakOfShadows.class,
+					DriedRose.class, EtherealChains.class, HolyTome.class,
+					HornOfPlenty.class, MasterThievesArmband.class, SandalsOfNature.class,
+					SkeletonKey.class, TalismanOfForesight.class, TimekeepersHourglass.class,
 					UnstableSpellbook.class
 			};
 			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
 			ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 
-			//Trinkets are unique like artifacts, but unlike them you can only have one at once
-			//So we don't need the same enforcement of uniqueness
 			TRINKET.classes = new Class<?>[]{
-					RatSkull.class,
-					ParchmentScrap.class,
-					PetrifiedSeed.class,
-					ExoticCrystals.class,
-					MossyClump.class,
-					DimensionalSundial.class,
-					ThirteenLeafClover.class,
-					TrapMechanism.class,
-					MimicTooth.class,
-					WondrousResin.class,
-					EyeOfNewt.class,
-					SaltCube.class,
-					VialOfBlood.class,
-					ShardOfOblivion.class,
-					ChaoticCenser.class,
-					FerretTuft.class,
-					CrackedSpyglass.class
+					RatSkull.class, ParchmentScrap.class, PetrifiedSeed.class,
+					ExoticCrystals.class, MossyClump.class, DimensionalSundial.class,
+					ThirteenLeafClover.class, TrapMechanism.class, MimicTooth.class,
+					WondrousResin.class, EyeOfNewt.class, SaltCube.class,
+					VialOfBlood.class, ShardOfOblivion.class, ChaoticCenser.class,
+					FerretTuft.class, CrackedSpyglass.class
 			};
 			TRINKET.defaultProbs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			TRINKET.probs = TRINKET.defaultProbs.clone();
@@ -610,6 +539,32 @@ public class Generator {
 			}
 		}
 	}
+
+	// Конец файла - всё что ниже, это методы random, storeInBundle и прочее из твоего файла
+	// Убедись, что они остались на месте после замены блока выше!
+				if (subOrdering != null){
+					for (int j=0; j < subOrdering.size(); j++){
+						if (subOrdering.get(j).isInstance(item)){
+							catResult = i;
+							subResult = j;
+						}
+					}
+				} else {
+					if (values()[i].superClass.isInstance(item)) {
+						catResult = i;
+						subResult = 0;
+					}
+				}
+			}
+			if (catResult != -1) return catResult*100 + subResult;
+
+			//items without a category-defined order are sorted based on the spritesheet
+			return Short.MAX_VALUE+item.image();
+		}
+
+		static {
+			
+	
 
 	private static final float[][] floorSetTierProbs = new float[][] {
 			{0, 75, 20,  4,  1},
