@@ -50,6 +50,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.SurfaceScene;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.shatteredpixel.shatteredpixeldungeon.windows.WndMessage;
+import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ObsidianRoom;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Music;
@@ -307,13 +308,13 @@ public class SewerLevel extends RegularLevel {
 			
 			left = lifespan = 0.4f;
 		}
-	@Override
+@Override
 protected void addSpecialRooms(java.util.ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms) {
     super.addSpecialRooms(rooms);
     if (Dungeon.depth == 1) {
         // Принудительно добавляем обсидиановую комнату в список генерации
         rooms.add(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.ObsidianRoom());
     }
-  }
+}
 	}
 }
