@@ -1,31 +1,33 @@
 package com.shatteredpixel.shatteredpixeldungeon.levels.features;
 
-import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.ObsidianKey;
+import com.shatteredpixel.shatteredpixeldungeon.items.ObsidianKey;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Saber;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
-// Если Feature не находится, попробуй заменить на Level.Feature или просто убрать extends, если это тайл
-public class ObsidianChest { 
-    
+public class ObsidianChest {
+
     public static void open( Hero hero, int pos ) {
-        // Проверка ключа через инвентарь (в Shattered это обычно hero.belongings.getItem)
+        // Проверяем наличие обсидианового ключа в инвентаре
         ObsidianKey key = hero.belongings.getItem( ObsidianKey.class );
         
         if (key != null) {
+            // Удаляем ключ
             key.detach( hero.belongings ); 
             
+            // Превращаем сундук в пустой пол (Terrain.EMPTY_SP)
             Dungeon.level.set( pos, Terrain.EMPTY_SP ); 
-            // В новых версиях вместо updateVisuals используется:
-            Dungeon.observe(); 
+            Dungeon.observe(); // Обновляем графику уровня
             
+            // Выбрасываем саблю на пол
             Dungeon.level.drop( new Saber(), pos ).sprite.drop();
-            GLog.p( "Обсидиановый сундук открыт!" );
+            
+            GLog.p( "Обсидиановый замок щелкнул и открылся!" );
         } else {
-            GLog.w( "Этот сундук заперт на обсидиановый замок." );
+            // Если ключа нет
+            GLog.w( "Вам нужен обсидиановый ключ, чтобы открыть этот сундук." );
         }
     }
 }
