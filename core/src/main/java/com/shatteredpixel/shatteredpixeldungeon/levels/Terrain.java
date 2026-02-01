@@ -39,6 +39,7 @@ public class Terrain {
 	public static final int CRYSTAL_DOOR	= 31;
 	public static final int PEDESTAL		= 11;
 	public static final int WALL_DECO		= 12;
+	public static final int OBSIDIAN_CHEST = 120; // Число — это индекс в tiles0.png
 	public static final int BARRICADE		= 13;
 	public static final int EMPTY_SP		= 14;
 	public static final int HIGH_GRASS		= 15;
@@ -123,6 +124,8 @@ public class Terrain {
 		flags[REGION_DECO_ALT] = flags[STATUE_SP];
 		flags[MINE_CRYSTAL] = SOLID;
 		flags[MINE_BOULDER] = SOLID;
+		flags[OBSIDIAN_CHEST] = LOS_BLOCKING | SOLID; 
+		
 
 	}
 
