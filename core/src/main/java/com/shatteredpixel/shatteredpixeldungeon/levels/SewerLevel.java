@@ -309,13 +309,14 @@ public class SewerLevel extends RegularLevel {
 			left = lifespan = 0.4f;
 		}
 @Override
-public void decorate() {
-    super.decorate();
+public void create() {
+    super.create();
     if (Dungeon.depth == 1) {
-        // Теперь, благодаря импорту выше, можно писать просто ObsidianRoom
-        rooms.add(new ObsidianRoom());
+        // Добавляем комнату в список спец. комнат уровня
+        specialRooms.add( new ObsidianRoom() );
     }
 }
+		
 		
 	}
 }
