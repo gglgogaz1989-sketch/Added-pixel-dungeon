@@ -1,4 +1,4 @@
-/*
+  /*
  * Pixel Dungeon
  * Copyright (C) 2012-2015 Oleg Dolya
  *
@@ -336,16 +336,19 @@ public class Generator {
 
 } // ЭТА СКОБКА ЗАКРЫВАЕТ ENUM CATEGORY (Её отсутствие ломает всё!)
 
-static {
-        FOOD.classes = new Class<?>[]{
-        Food.class, Pasty.class, MysteryMeat.class,
-        HardIron.class, Glass.class, Bottle.class, Diamond.class 
-    };
-        FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
-
-         GOLD.classes = new Class<?>[]{
-         Gold.class };
-         GOLD.probs = new float[]{ 1 };{
+            static { // ОСТАВЬ ТОЛЬКО ОДИН РАЗ
+            FOOD.classes = new Class<?>[]{
+            Food.class, Pasty.class, MysteryMeat.class,
+            HardIron.class, Glass.class, Bottle.class, Diamond.class 
+        };
+            FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
+ 
+            GOLD.classes = new Class<?>[]{
+                   Gold.class };
+        GOLD.probs = new float[]{ 1 };
+        // ТУТ НЕ ДОЛЖНО БЫТЬ ОТКРЫВАЮЩЕЙ СКОБКИ {
+	GOLD.probs = new float[]{ 1 };
+			
     
     // ... дальше идут POTION и остальные ...
 				 
@@ -359,9 +362,13 @@ static {
 					PotionOfInvisibility.class,
 					PotionOfLevitation.class,
 					PotionOfParalyticGas.class,
-					PotionOfPurity.class,
-					PotionOfExperience.class};
-			POTION.defaultProbs  = new float[]{ 0, 3, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1 };
+                    PotionOfPurity.class,
+                    PotionOfExperience.class
+          }; // Вот эта скобка ДОЛЖНА закрывать массив POTION.classes
+
+    POTION.defaultProbs  = new float[]{ 0, 3, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1 };
+    // Дальше код пойдёт нормально
+		
 			POTION.defaultProbs2 = new float[]{ 0, 3, 2, 2, 1, 2, 1, 1, 1, 1, 1, 0 };
 			POTION.probs = POTION.defaultProbs.clone();
 			
