@@ -327,11 +327,19 @@ public class Generator {
 		}
 
 		static {
-			GOLD.classes = new Class<?>[]{
-					Gold.class };
-			GOLD.probs = new float[]{ 1 };
-			
-			POTION.classes = new Class<?>[]{
+	static {
+		// ВСТАВЛЯЙ СЮДА:
+		FOOD.classes = new Class<?>[]{
+			Food.class, Pasty.class, MysteryMeat.class,
+			HardIron.class, Glass.class, Bottle.class, Diamond.class 
+		};
+		FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
+
+		// Это уже есть в файле (строка 329 на скриншоте):
+		GOLD.classes = new Class<?>[]{
+				Gold.class };
+		GOLD.probs = new float[]{ 1 };
+		
 					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
 					PotionOfHealing.class,
 					PotionOfMindVision.class,
