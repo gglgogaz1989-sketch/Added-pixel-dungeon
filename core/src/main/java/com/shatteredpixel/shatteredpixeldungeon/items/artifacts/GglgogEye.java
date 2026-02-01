@@ -1,65 +1,61 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.artifacts;
 
-import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
-import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Light;
-import com.shatteredpixel.shatteredpixeldungeon.items.Item;
-import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
 public class GglgogEye extends Artifact {
 
     {
-        name = "Глаз gglgog";
-        image = 10; // ЗАМЕНИ на индекс своей текстуры!
-    }
-
-    protected boolean active = false;
-
-    @Override
-    protected ArtifactBuff makeBuff() {
-        return new EyeBuff();
+        image = 59;
     }
 
     @Override
-    public void execute(Hero hero) {
-        if (charge < 100 && !active) {
-            // Если не заряжен, ничего не делаем
-            return;
-        }
-        
-        active = !active; // Переключаем режим
-        hero.sprite.emitter().burst( Light.Particle.class, 10 );
-        updateQuickslot();
-    }
-
-    @Override
-    public void onNextTurn() {
-        if (active) {
-            charge -= 1; // Уменьшаем заряд каждый ход
-            if (charge <= 0) {
-                charge = 0;
-                active = false;
-            }
-        } else if (charge < 100) {
-            charge += 0.5f; // Медленно заряжается сам, когда выключен
-        }
-    }
-
-    // Бафф, который дает статы
-    public class EyeBuff extends ArtifactBuff {
-        @Override
-        public boolean act() {
-            if (active) {
-                // Здесь будет логика подсветки врагов 3х3
-            }
-            return super.act();
-        }
+    public String name() {
+        return "Глаз gglgog";
     }
 
     @Override
     public String desc() {
-        return "Древний глаз, который видит всё. Увеличивает урон и обзор, " +
-               "а при улучшении до +5 позволяет стрелять сквозь стены.";
+        return "Этот жуткий глаз всё еще вращается в глазнице. При активации он позволяет увидеть жизненную энергию всех существ на этаже.";
+    }
+
+    // Добавляем действие "Активировать" в меню предмета
+    @Override
+    public java.util.ArrayList<String> actions(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero) {
+        java.util.ArrayList<String> actions = super.actions(hero);
+        if (isEquipped(hero)) {
+            actions.add("ИСПОЛЬЗОВАТЬ");
+        }
+        return actions;
+    }
+
+    @Override
+    public void execute(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero, String action) {
+        if (action.equals("ИСПОЛЬЗОВАТЬ")) {
+            
+            activateVision();
+            
+            // Расходуем ход
+            hero.spend(1f);
+            hero.busy();
+            hero.sprite.operate(hero.pos);
+            
+            GLog.p("Глаз gglgog широко открывается...");
+        } else {
+            super.execute(hero, action);
+        }
+    }
+
+    private void activateVision() {
+        // Проходим по всем мобам на текущем уровне
+        for (Mob mob : Dungeon.level.mobs) {
+            if (mob != null && mob.isAlive()) {
+                // Делаем моба видимым для игрока (даже сквозь стены)
+                mob.sprite.visible = true;
+                // В некоторых версиях нужно обновить освещение спрайта
+                mob.sprite.updateArmor(); 
+            }
+        }
     }
 }
-
