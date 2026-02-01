@@ -323,24 +323,20 @@ public class Generator {
 			if (catResult != -1) return catResult*100 + subResult;
 
 			//items without a category-defined order are sorted based on the spritesheet
-    // Строка 326 (метод order еще открыт)
-    return Short.MAX_VALUE+item.image();
-    } // Скобка 1: Закрывает метод order
+			return Short.MAX_VALUE+item.image();
+		}
+	}
 
-} // Скобка 2: Закрывает enum Category
+	static {
+		FOOD.classes = new Class<?>[]{
+			Food.class, Pasty.class, MysteryMeat.class,
+			HardIron.class, Glass.class, Bottle.class, Diamond.class 
+		};
+		FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
 
-static { // Начало блока настроек (строка 340 на фото)
-    FOOD.classes = new Class<?>[]{
-        Food.class, Pasty.class, MysteryMeat.class,
-        HardIron.class, Glass.class, Bottle.class, Diamond.class 
-    };
-	
-	
-    FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
-    
-    GOLD.classes = new Class<?>[]{
-        Gold.class };
-    GOLD.probs = new float[]{ 1 };
+		GOLD.classes = new Class<?>[]{
+				Gold.class };
+		GOLD.probs = new float[]{ 1 };										 
 	
 		POTION.classes = new Class<?>[]{
 				PotionOfStrength.class,
@@ -354,12 +350,11 @@ static { // Начало блока настроек (строка 340 на фо
 				PotionOfLevitation.class,
 				PotionOfParalyticGas.class,
 				PotionOfPurity.class,
-				PotionOfExperience.class,
-		}
+				PotionOfExperience.class,}
 
     POTION.defaultProbs  = new float[]{ 0, 3, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1 };
     // Дальше код пойдёт нормально
-		
+
 			POTION.defaultProbs2 = new float[]{ 0, 3, 2, 2, 1, 2, 1, 1, 1, 1, 1, 0 };
 			POTION.probs = POTION.defaultProbs.clone();
 			
