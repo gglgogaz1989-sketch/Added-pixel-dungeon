@@ -1,38 +1,20 @@
 package com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee;
 
-import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
-
 public class Saber extends MeleeWeapon {
-
     {
-        // Название для логов
-        image = 45; // Замени на свой индекс сабли в items.png
-        tier = 3;   // Уровень оружия (как у меча)
+        image = 45;
+        tier = 3;
     }
 
     @Override
-    public String Name() {
-        return "Сабля";
-    }
+    public String name() { return "Сабля"; }
 
     @Override
-    public String info() {
-        return "Изогнутый клинок, выкованный из легкой, но прочной стали. Позволяет наносить быстрые и точные удары.";
-    }
+    public String desc() { return "Изогнутый клинок из легкой стали. Очень быстрый."; }
 
     @Override
-    public int min() {
-        return 10; // Минимальный урон
-    }
+    public int min() { return 10; }
 
     @Override
-    public int max() {
-        return 18; // Максимальный урон
-    }
-    
-    @Override
-    public int price() {
-        return 150;
-    }
+    public int max() { return 18; }
 }
-
