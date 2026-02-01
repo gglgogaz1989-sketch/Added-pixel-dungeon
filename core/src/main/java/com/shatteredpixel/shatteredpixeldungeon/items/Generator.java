@@ -328,18 +328,27 @@ public class Generator {
 
 		static {
 	static {
-		// ВСТАВЛЯЙ СЮДА:
-		FOOD.classes = new Class<?>[]{
-			Food.class, Pasty.class, MysteryMeat.class,
-			HardIron.class, Glass.class, Bottle.class, Diamond.class 
-		};
-		FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
+        // ... тут заканчивается метод order ...
+        if (catResult != -1) return catResult*100 + subResult;
 
-		// Это уже есть в файле (строка 329 на скриншоте):
-		GOLD.classes = new Class<?>[]{
-				Gold.class };
-		GOLD.probs = new float[]{ 1 };
-		
+        return Short.MAX_VALUE+item.image();
+    } // ЭТА СКОБКА ЗАКРЫВАЕТ МЕТОД ORDER
+
+} // ЭТА СКОБКА ЗАКРЫВАЕТ ENUM CATEGORY (Её отсутствие ломает всё!)
+
+static {
+        FOOD.classes = new Class<?>[]{
+        Food.class, Pasty.class, MysteryMeat.class,
+        HardIron.class, Glass.class, Bottle.class, Diamond.class 
+    };
+        FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
+
+         GOLD.classes = new Class<?>[]{
+         Gold.class };
+         GOLD.probs = new float[]{ 1 };{
+    
+    // ... дальше идут POTION и остальные ...
+				 
 					PotionOfStrength.class, //2 drop every chapter, see Dungeon.posNeeded()
 					PotionOfHealing.class,
 					PotionOfMindVision.class,
