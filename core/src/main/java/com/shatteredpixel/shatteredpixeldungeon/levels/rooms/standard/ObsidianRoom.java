@@ -23,15 +23,18 @@ public class ObsidianRoom extends StandardRoom {
         int center = level.pointToCell(center());
         level.set(center, Terrain.OBSIDIAN_CHEST);
 
-        // В новых версиях нужно указывать, на какой тип пола класть предмет
-        int keyPos = level.randomRespawnCell( Terrain.EMPTY_SP );
+        // ИСПРАВЛЕНИЕ 1: Убрали Terrain.EMPTY_SP из скобок.
+        // Метод сам найдет подходящую клетку.
+        int keyPos = level.randomRespawnCell(); 
+        
         if (keyPos != -1) {
             level.drop(new ObsidianKey(), keyPos).sprite.drop();
         }
 
+        // ИСПРАВЛЕНИЕ 2: Оставили только тип двери.
+        // Дверь сама знает свои координаты.
         for (Door door : connected.values()) {
-            // Исправленные аргументы: уровень, позиция двери, тип
-            door.set(level, level.pointToCell(door), Door.Type.LOCKED);
+            door.set(Door.Type.LOCKED); 
         }
     }
 }
