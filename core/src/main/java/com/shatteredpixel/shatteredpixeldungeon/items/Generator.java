@@ -329,15 +329,14 @@ public class Generator {
 
 	static {
 		FOOD.classes = new Class<?>[]{
-			Food.class, Pasty.class, MysteryMeat.class,
-			HardIron.class, Glass.class, Bottle.class, Diamond.class 
+			Food.class, Pasty.class, MysteryMeat.class 
 		};
-		FOOD.probs = new float[]{ 10, 2, 2, 3, 3, 2, 0.5f };
+		FOOD.probs = new float[]{ 10, 2, 2 };
 
 		GOLD.classes = new Class<?>[]{
 				Gold.class };
-		GOLD.probs = new float[]{ 1 };										 
-	
+		GOLD.probs = new float[]{ 1 };
+		
 		POTION.classes = new Class<?>[]{
 				PotionOfStrength.class,
 				PotionOfHealing.class,
