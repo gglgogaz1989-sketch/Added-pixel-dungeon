@@ -3,7 +3,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items.keys;
 public class ObsidianKey extends Key {
     
     {
-        image = 58; // Твой индекс из items.png
+        image = 58; // Твой индекс
+        stackable = true; // ТЕПЕРЬ КЛЮЧИ БУДУТ СТАКАТЬСЯ
     }
 
     @Override
@@ -20,4 +21,3 @@ public class ObsidianKey extends Key {
         super();
     }
 }
-
