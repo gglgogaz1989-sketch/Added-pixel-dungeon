@@ -153,6 +153,7 @@ import com.shatteredpixel.shatteredpixeldungeon.plants.Starflower;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SmallCrab
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
@@ -208,7 +209,7 @@ public enum Bestiary {
 
 	static {
 
-		REGIONAL.addEntities(Rat.class, Snake.class, Gnoll.class, Swarm.class, Crab.class, Slime.class,
+		REGIONAL.addEntities(Rat.class, Snake.class, Gnoll.class, SmallCrab.class, Swarm.class, Crab.class, Slime.class,
 				Skeleton.class, Thief.class, DM100.class, Guard.class, Necromancer.class,
 				Bat.class, Brute.class, Shaman.RedShaman.class, Shaman.BlueShaman.class, Shaman.PurpleShaman.class, Spinner.class, DM200.class,
 				Ghoul.class, Elemental.FireElemental.class, Elemental.FrostElemental.class, Elemental.ShockElemental.class, Warlock.class, Monk.class, Golem.class,
