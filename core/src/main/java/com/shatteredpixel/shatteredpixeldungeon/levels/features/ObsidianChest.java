@@ -8,22 +8,20 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 
 public class ObsidianChest {
-
     public static void open( Hero hero, int pos ) {
-        // Ищем ключ в рюкзаке
         ObsidianKey key = hero.belongings.getItem( ObsidianKey.class );
         
         if (key != null) {
-            // Исправленный метод удаления: используем принадлежность предмета
-            key.detach( key.belongsTo ); 
+            // В новых версиях ключ удаляется через рюкзак напрямую
+            hero.belongings.backpack.remove( key ); 
             
             Dungeon.level.set( pos, Terrain.EMPTY_SP ); 
             Dungeon.observe(); 
             
             Dungeon.level.drop( new Saber(), pos ).sprite.drop();
-            GLog.p( "Обсидиановый замок щелкнул и открылся!" );
+            GLog.p( "Обсидиановый замок открылся!" );
         } else {
-            GLog.w( "Этот сундук заперт на обсидиановый замок." );
+            GLog.w( "Нужен обсидиановый ключ!" );
         }
     }
 }
