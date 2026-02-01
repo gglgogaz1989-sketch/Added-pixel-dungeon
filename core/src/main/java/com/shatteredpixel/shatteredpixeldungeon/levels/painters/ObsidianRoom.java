@@ -18,24 +18,20 @@ public class ObsidianRoom extends StandardRoom {
 
     @Override
     public void paint(Level level) {
-        // 1. Рисуем коробку комнаты
         Painter.fill(level, this, Terrain.WALL, Terrain.EMPTY_SP);
 
-        // 2. Ставим сундук в центр
         int center = level.pointToCell(center());
         level.set(center, Terrain.OBSIDIAN_CHEST);
 
-        // 3. Гарантированно спавним ключ где-то на этаже
-        // Мы используем randomRespawnCell, чтобы ключ не упал в стену
-        int keyPos = level.randomRespawnCell();
+        // В новых версиях нужно указывать, на какой тип пола класть предмет
+        int keyPos = level.randomRespawnCell( Terrain.EMPTY_SP );
         if (keyPos != -1) {
             level.drop(new ObsidianKey(), keyPos).sprite.drop();
         }
 
-        // 4. Запираем вход на обычный железный замок (белый)
         for (Door door : connected.values()) {
-            door.set(level, Door.Type.LOCKED);
+            // Исправленные аргументы: уровень, позиция двери, тип
+            door.set(level, level.pointToCell(door), Door.Type.LOCKED);
         }
     }
 }
-
