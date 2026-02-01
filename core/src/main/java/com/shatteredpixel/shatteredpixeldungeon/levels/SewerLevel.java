@@ -44,6 +44,39 @@ public class SewerLevel extends RegularLevel {
 			Assets.Music.SEWERS_1, Assets.Music.SEWERS_3, Assets.Music.SEWERS_3};
 	public static final float[] SEWER_TRACK_CHANCES = new float[]{1f, 1f, 0.5f, 0.25f, 1f, 0.5f};
 
+	// --- ИСПРАВЛЕНИЕ: Логика добавления комнаты через create() ---
+	@Override
+	public void create() {
+		// Сначала вызываем стандартную генерацию
+		super.create();
+
+		// Если это первый этаж, добавляем нашу комнату вручную в список
+		if (Dungeon.depth == 1) {
+			if (rooms == null) {
+				rooms = new ArrayList<>();
+			}
+			// Добавляем комнату. Она может появиться или нет, в зависимости от места,
+			// но это не вызовет ошибку компиляции.
+			rooms.add(new ObsidianRoom());
+		}
+	}
+	
+	@Override
+	protected int specialRooms(boolean forceMax) {
+		int n = super.specialRooms(forceMax);
+		return Dungeon.depth == 1 ? n + 1 : n;
+	}
+
+	// --- ИСПРАВЛЕНИЕ: Добавлен обязательный метод painter() ---
+	@Override
+	protected Painter painter() {
+		return new SewerPainter()
+				.setWater(feeling == Feeling.WATER ? 0.85f : 0.30f, 5)
+				.setGrass(feeling == Feeling.GRASS ? 0.80f : 0.20f, 4)
+				.setTraps(nTraps(), trapClasses(), trapChances());
+	}
+
+	@Override
 	public void playLevelMusic(){
 		if (Ghost.Quest.active() || Statistics.amuletObtained){
 			if (Statistics.amuletObtained && Dungeon.depth == 1){
@@ -53,21 +86,6 @@ public class SewerLevel extends RegularLevel {
 			}
 		} else {
 			Music.INSTANCE.playTracks(SEWER_TRACK_LIST, SEWER_TRACK_CHANCES, false);
-		}
-	}
-
-	@Override
-	protected int specialRooms(boolean forceMax) {
-		int n = super.specialRooms(forceMax);
-		// Добавляем место под 1 обсидиановую комнату только на 1-м этаже
-		return Dungeon.depth == 1 ? n + 1 : n;
-	}
-
-	@Override
-	protected void addSpecialRooms(ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms) {
-		super.addSpecialRooms(rooms);
-		if (Dungeon.depth == 1) {
-			rooms.add(new ObsidianRoom());
 		}
 	}
 
@@ -254,4 +272,5 @@ public class SewerLevel extends RegularLevel {
 			left = lifespan = 0.4f;
 		}
 	}
-	}
+					}
+				
