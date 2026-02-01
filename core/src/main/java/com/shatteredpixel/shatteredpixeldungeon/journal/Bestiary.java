@@ -153,7 +153,7 @@ import com.shatteredpixel.shatteredpixeldungeon.plants.Starflower;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Stormvine;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass;
 import com.shatteredpixel.shatteredpixeldungeon.plants.Swiftthistle;
-import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SmallCrab
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.SmallCrab;
 import com.watabou.utils.Bundle;
 
 import java.util.ArrayList;
