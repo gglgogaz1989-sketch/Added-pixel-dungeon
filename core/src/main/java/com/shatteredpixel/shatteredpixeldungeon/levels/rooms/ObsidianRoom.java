@@ -1,4 +1,4 @@
-package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard;
+package com.shatteredpixel.shatteredpixeldungeon.levels.rooms;
 
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.ObsidianKey;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
