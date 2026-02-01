@@ -2,18 +2,14 @@ package com.shatteredpixel.shatteredpixeldungeon.levels;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Ghost;
 import com.shatteredpixel.shatteredpixeldungeon.effects.Ripple;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Splash;
-import com.shatteredpixel.shatteredpixeldungeon.items.Amulet;
-import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.Painter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.painters.SewerPainter;
 import com.shatteredpixel.shatteredpixeldungeon.levels.traps.*;
-import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
+// ПРОВЕРЬ ЭТОТ ПУТЬ! Если файл ObsidianRoom лежит в папке standard, добавь .standard в конце
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.ObsidianRoom;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -26,7 +22,14 @@ import com.watabou.utils.Random;
 
 public class SewerLevel extends RegularLevel {
 
-	{ color1 = 0x48763c; color2 = 0x59994a; }
+	{
+		color1 = 0x48763c;
+		color2 = 0x59994a;
+	}
+
+	// Эти переменные нужны для SewerBossLevel (ошибки 4 и 5)
+	public static final String[] SEWER_TRACK_LIST = new String[]{Assets.Music.SEWERS_1, Assets.Music.SEWERS_2, Assets.Music.SEWERS_3};
+	public static final float[] SEWER_TRACK_CHANCES = new float[]{1f, 1f, 1f};
 
 	@Override
 	public void create() {
@@ -42,15 +45,32 @@ public class SewerLevel extends RegularLevel {
 		return Dungeon.depth == 1 ? n + 1 : n;
 	}
 
+	// ИСПРАВЛЕНИЕ ОШИБКИ №2: Добавляем обязательный метод painter()
+	@Override
+	protected Painter painter() {
+		return new SewerPainter()
+				.setWater(feeling == Feeling.WATER ? 0.85f : 0.30f, 5)
+				.setGrass(feeling == Feeling.GRASS ? 0.80f : 0.20f, 4)
+				.setTraps(nTraps(), trapClasses(), trapChances());
+	}
+
 	@Override
 	public void playLevelMusic(){
-		String[] tracks = {Assets.Music.SEWERS_1, Assets.Music.SEWERS_2, Assets.Music.SEWERS_3};
-		float[] chances = {1f, 1f, 1f};
-		Music.INSTANCE.playTracks(tracks, chances, false);
+		Music.INSTANCE.playTracks(SEWER_TRACK_LIST, SEWER_TRACK_CHANCES, false);
 	}
 
 	@Override public String tilesTex() { return Assets.Environment.TILES_SEWERS; }
 	@Override public String waterTex() { return Assets.Environment.WATER_SEWERS; }
+
+	@Override
+	protected Class<?>[] trapClasses() {
+		return new Class<?>[]{ WornDartTrap.class, ToxicTrap.class, ShockingTrap.class, ChillingTrap.class };
+	}
+
+	@Override
+	protected float[] trapChances() {
+		return new float[]{1, 1, 1, 1};
+	}
 
 	@Override
 	public Group addVisuals() {
@@ -104,4 +124,5 @@ public class SewerLevel extends RegularLevel {
 			left = lifespan = 0.4f;
 		}
 	}
-}
+			}
+	
